@@ -29,7 +29,6 @@ public class UserController {
 	public ModelAndView show(@ModelAttribute User user) {
 		
 		User savedUser=service.saveUser(user);
-		
 		ModelAndView mv=new ModelAndView();
 		mv.setViewName("success");
 		mv.addObject("user",savedUser);
