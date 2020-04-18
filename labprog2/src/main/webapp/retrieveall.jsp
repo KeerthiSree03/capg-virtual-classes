@@ -16,7 +16,7 @@
 	<th>Trainee Domain </th>
 	<th>Trainee Location </th>
 </tr>
-<c:forEach items="${allTrainees}" var="trainee">
+<c:forEach items="${allTrainees}" var="Trainee">
 <tr>
 	<td>${trainee.traineeId}</td>
 	<td>${trainee.traineeName}</td>
