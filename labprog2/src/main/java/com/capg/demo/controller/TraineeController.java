@@ -33,7 +33,7 @@ public class TraineeController {
 	
 	@PostMapping("/retrieve")
 	public ModelAndView getTraineeById(@RequestParam("traineeId") int traineeId) {
-		Trainee trainee=service.retrieveUserById(traineeId);
+		Trainee trainee=service.retrieveTraineeById(traineeId);
 		ModelAndView mv=new ModelAndView();
 		mv.setViewName("show.jsp");
 		mv.addObject("trainee", trainee);
@@ -44,11 +44,31 @@ public class TraineeController {
 	public ModelAndView retrieveAllTrainee() {
 		List<Trainee> allTrainees =service.retrieveAllTrainee();
 		ModelAndView mv=new ModelAndView();
-		mv.setViewName("trainee-list.jsp");
-		mv.addObject("allTrainees", allTrainees);
+		mv.setViewName("retrieveall.jsp");
+		mv.addObject("allTrainees",allTrainees);
 		return mv;
 	}
 	
+	@PostMapping("/delete")
+	public String deleteById(@RequestParam("traineeId") int traineeId) {
+		service.deleteTraineeById(traineeId);
+		return "trainee-index.jsp";
+	}
+	
+	@PostMapping("/modify")
+	public ModelAndView modifyById(@RequestParam("traineeId") int traineeId) {
+		ModelAndView mv=new ModelAndView();
+		Trainee trainee=service.retrieveTraineeById(traineeId);
+		mv.setViewName("modification.jsp");
+		mv.addObject("trainee", trainee);
+		return mv;
+	}
+	
+	@GetMapping("/modification")
+	public String modified(@ModelAttribute Trainee trainee) {
+		service.modifyTrainee(trainee);
+		return "trainee-index.jsp";
+	}
 	
 	
 }
